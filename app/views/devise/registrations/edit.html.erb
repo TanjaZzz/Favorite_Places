@@ -1,0 +1,69 @@
+<div class="container edit">
+    <h2 class="center">Edit profile</h2>
+<div class="row">
+<div class="col-md-6">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :age %><br />
+    <%= f.number_field :age, autofocus: true, autocomplete: "age", class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+     <%= f.label :sex %></br>
+     <span class="option">Male<span><%= f.radio_button :sex, "1" %></br>
+     <span class="option">Female<span><%= f.radio_button :sex, "2" %></br>
+     <span class="option">Non-binary<span><%= f.radio_button :sex, "3" %></br>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="form-group">
+    <%= f.label :avatar_url %>
+    <p><%= image_tag(@user.avatar_url.thumb.url) if @user.avatar_url? %></p>
+    <%= f.file_field :avatar_url %>
+    <p>Allowed types: jpg, jpeg, gif, png</p>
+  </div>
+
+    <div class="form-group">
+      <%= f.label :password %> <i>(Оставьте пустым, если не хотите менять)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      <% if @minimum_password_length %>
+        <em>не менее <%= @minimum_password_length %> символов</em>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Update', class: 'btn btn-outline-light' %>
+      <button type="button" class="btn btn-outline-light"><%= link_to "Delete your account", @user, method: :delete, data: { confirm: "Are you sure? This action is irreversible!" } %></button>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>
+

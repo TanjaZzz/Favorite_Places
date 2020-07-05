@@ -1,0 +1,7 @@
+<% unless current_user == @user %>
+  <p class="map_belongs">Current map of
+  <%= image_tag(@user.avatar_url.thumb.url, class: 'user_avatar') if @user.avatar_url? %>
+  <strong>
+    <%= @user.username %>
+  </strong></p>
+<% end %>

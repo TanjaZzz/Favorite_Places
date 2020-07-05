@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FavoritePlaces</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+      function initMap() {}
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHMG_afSPeFIGsCLwEsNCS4OxwiX0HkD8&callback=initMap"></script>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_pack_tag 'application' %>
+    <%= render 'application/favicon' %>
+
+  </head>
+  <% if params.has_key?(:id) %>
+  <body <%= "data-params-id=#{params[:id]}" %>>
+  <% elsif params.has_key?(:user_id) %>
+  <body <%= "data-params-id=#{params[:user_id]}" %>>
+  <% else %>
+  <body>
+  <% end %>
+
+  <div class="container top">
+    <div class="row navbar">
+      <div class="col-4"><%= link_to t('app.name'), root_path, class: "navbar-brand"  %></div>
+      <div class="col-2">
+        <%= form_tag(users_path(@user), :method => "get", id: "search-form", class: "form-inline ml-auto") do %>
+
+          <%= text_field_tag :search, params[:search], placeholder: "Search Users", class: "input-code__input", id: "code-input" %>
+            <label for="code-input" class="input-code__label"></label>
+
+                <button class="search-button" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+
+        <% end %>
+      </div>
+      <div class="col-4">
+        <% if user_signed_in? %>
+
+          <button class="btn btn-link dropdown-toggle username"
+                  type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <%= image_tag user_avatar(@user), class: 'user_avatar' %>
+                  <%= current_user.name %>
+          </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to 'My Places', current_user %><br>
+              <%= link_to 'Edit Profile', edit_user_registration_path(current_user) %><br>
+              <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+            </div>
+        <% else %>
+          <button type="button" class="btn btn-outline-light btn-sm"><%= link_to 'Sign in',
+                                                                               new_user_session_path %></button>
+          <button type="button" class="btn btn-outline-light btn-sm"><%= link_to 'Sign up',
+                                                                              new_user_registration_path %></button>
+          <button type="button" class="btn btn-outline-light btn-sm"><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+        <% flash.each do |key, value| %>
+          <div class="<%= flash_class(key) %> alert alert-dismissible fade show" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <div><%= value %></div>
+          </div>
+        <% end %>
+  <%= yield %>
+</body>
+</html>
