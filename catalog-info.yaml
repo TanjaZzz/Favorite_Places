@@ -4,6 +4,7 @@ metadata:
   name: Favorite_Places
   annotations:
     github.com/project-slug: TanjaZzz/Favorite_Places
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: other
   lifecycle: unknown
