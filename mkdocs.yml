@@ -1,8 +1,7 @@
 site_name: 'example-docs'
 
 nav:
-  - Home: Index.md
+  - Home: index.md
+
 plugins:
   - techdocs-core
-  - search
-  - same-dir
