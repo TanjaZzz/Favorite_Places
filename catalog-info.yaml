@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Favorite_Places
+  annotations:
+    github.com/project-slug: TanjaZzz/Favorite_Places
+spec:
+  type: other
+  lifecycle: unknown
+  owner: TanjaZzz
