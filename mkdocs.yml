@@ -4,3 +4,5 @@ nav:
   - Home: README.md
 plugins:
   - techdocs-core
+  - search
+  - same-dir
